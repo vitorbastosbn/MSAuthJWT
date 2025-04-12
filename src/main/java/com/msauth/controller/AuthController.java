@@ -34,12 +34,9 @@ public class AuthController {
     })
     public ResponseEntity<ApiResponse<TokenResponse>> register(@RequestBody AuthRequest request) {
         try {
-            String token = authService.register(request);
-            TokenResponse tokenResponse = new TokenResponse();
-            tokenResponse.setToken(token);
+            authService.register(request);
             return ResponseEntity
-                    .status(HttpStatus.CREATED)
-                    .body(ApiResponse.created(tokenResponse));
+                    .status(HttpStatus.CREATED).build();
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
@@ -75,12 +72,9 @@ public class AuthController {
     })
     public ResponseEntity<ApiResponse<TokenResponse>> generateTestToken() {
         try {
-            String token = authService.register(new AuthRequest("test", "test"));
-            TokenResponse tokenResponse = new TokenResponse();
-            tokenResponse.setToken(token);
+            authService.register(new AuthRequest("test", "test"));
             return ResponseEntity
-                    .status(HttpStatus.CREATED)
-                    .body(ApiResponse.created(tokenResponse));
+                    .status(HttpStatus.CREATED).build();
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
